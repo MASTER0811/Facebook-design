@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facebook</title>
+    <link rel="icon" href="https://static.xx.fbcdn.net/rsrc.php/yD/r/d4ZIVX-5C-b.ico">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Two+Tone" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/bacbfe92f2.js" crossorigin="anonymous"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: 'poppins', sans-serif;
+        box-sizing: border-box;
+        text-decoration: none;
+    }
+
+    :root {
+        --body-color: #efefef;
+        --nav-color: #1876f2;
+        --bg-color: #fff;
+        --the-color: #626262;
+    }
+
+    .dark-theme {
+        --body-color: #303030;
+        --nav-color: #303030;
+        --bg-color: #202020;
+        --the-color: #f5f5f5;
+    }
+
+    body {
+        background: var(--body-color);
+        transition: background 0.5s;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--nav-color);
+        padding: 5px 5%;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .logo {
+        width: 160px;
+        margin-right: 45px;
+    }
+
+    .nav-left,
+    .nav-right {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav-left ul li {
+        list-style: none;
+        display: inline-block;
+    }
+
+    .nav-left ul li img {
+        width: 28px;
+        margin: 0 15px;
+    }
+
+    .nav-user-icon {
+        margin-left: 30px;
+    }
+
+    .nav-user-icon img {
+        width: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .search-box {
+        background: #efefef;
+        width: 350px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        padding: 0 15px;
+    }
+
+    .search-box img {
+        width: 18px;
+    }
+
+    .search-box input {
+        padding: 10px;
+        width: 100%;
+        background: transparent;
+        outline: none;
+        border: 0;
+    }
+
+    .online {
+        position: relative;
+
+    }
+
+    .online::after {
+        content: '';
+        width: 7px;
+        height: 7px;
+        border: 2px solid #ffffff;
+        border-radius: 50%;
+        background: #41db51;
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 13px 5%;
+    }
+
+    .left-sidebar {
+        flex-basis: 25%;
+        position: sticky;
+        top: 70px;
+        align-items: flex-start;
+    }
+
+    .right-sidebar {
+        flex-basis: 25%;
+        position: sticky;
+        top: 70px;
+        align-items: flex-start;
+        background: var(--bg-color);
+        padding: 20px;
+        border-radius: 4px;
+        color: var(--the-color);
+    }
+
+    .main-content {
+        flex-basis: 47%;
+    }
+
+    .imp-links a,
+    .shortcut-links a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        color: var(--the-color);
+        width: fit-content;
+    }
+
+    .imp-links a img {
+        width: 25px;
+        margin-right: 15px;
+    }
+
+    .imp-links a:last-child {
+        color: #1876f2;
+    }
+
+    .imp-links {
+        border-bottom: 1px solid #cccccc;
+    }
+
+    .shortcut-links a img {
+        width: 40px;
+        border-radius: 4px;
+        margin-right: 15px;
+    }
+
+    .shortcut-links p {
+        margin: 25px 0;
+        color: var(--the-color);
+        font-weight: 600;
+    }
+
+    .sidebar-title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 18px;
+    }
+
+    .right-sidebar h4 {
+        font-weight: 600;
+        font-size: 16px;
+    }
+
+    .sidebar-title a {
+        text-decoration: none;
+        color: #1876f2;
+        font-size: 12.5px;
+    }
+
+    .event {
+        display: flex;
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+
+    .left-event {
+        border-radius: 10px;
+        height: 65px;
+        width: 65px;
+        margin-right: 15px;
+        padding-top: 10px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .event p {
+        font-size: 12px;
+    }
+
+    .event a {
+        font-size: 12px;
+        text-decoration: none;
+        color: #1876f2;
+    }
+
+    .left-event span {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        background: #1876f2;
+        color: #fff;
+        font-size: 10px;
+        padding: 4px 0;
+    }
+
+    .sidebar-ads {
+        width: 100%;
+        margin-bottom: 20px;
+        border-radius: 5px;
+    }
+
+    .online-list {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .online-list .online img {
+        width: 40px;
+        border-radius: 50%;
+    }
+
+    .online-list .online {
+        width: 40px;
+        border-radius: 50%;
+        margin-right: 15px
+    }
+
+    .online-list .online::after {
+        top: unset;
+        bottom: 5px;
+    }
+
+    .story-gallery {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+    }
+
+    .story {
+        flex-basis: 18%;
+        padding-top: 32%;
+        position: relative;
+
+        background-position: center;
+        background-size: cover;
+        border-radius: 10px;
+    }
+
+    .story img {
+        position: absolute;
+        width: 45px;
+        border-radius: 50%;
+        top: 10px;
+        left: 10px;
+        border: 5px solid #1876f2;
+    }
+
+    .story p {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-size: 14px;
+    }
+
+    .story.story1 img {
+        top: unset;
+        left: 50%;
+        bottom: 40px;
+        transform: translateX(-50%);
+        border: 0;
+        width: 35px;
+    }
+
+    .story1 {
+        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url(./status-1.png);
+    }
+
+    .story2 {
+        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url(./status-2.png);
+    }
+
+    .story3 {
+        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url(./status-3.png);
+    }
+
+    .story4 {
+        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url(./status-4.png);
+    }
+
+    .story5 {
+        background-image: linear-gradient(transparent, rgba(0, 0, 0, 0.5)), url(./status-5.png);
+    }
+
+    .write-post-container {
+        width: 100%;
+        background: var(--bg-color);
+        border-radius: 6px;
+        padding: 20px;
+        color: #626262;
+    }
+
+    .user-profile {
+        display: flex;
+        align-items: center;
+
+    }
+
+    .user-profile img {
+        width: 45px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .user-profile p {
+        margin-bottom: -5px;
+        font-weight: 500;
+        color: #626262;
+    }
+
+    .user-profile small {
+        font-size: 12px;
+    }
+
+    .post-input-container {
+        padding-left: 55px;
+        padding-top: 20px;
+    }
+
+    .post-input-container textarea {
+        width: 100%;
+        border: 0;
+        outline: none;
+        border-bottom: 1px solid #ccc;
+        background: transparent;
+        resize: none;
+    }
+
+    .add-post-links {
+        display: flex;
+        margin-top: 10px;
+    }
+
+    .add-post-links a {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        color: #626262;
+        margin-right: 30px;
+        font-size: 13px;
+    }
+
+    .add-post-links img {
+        width: 20px;
+        margin-right: 10px;
+    }
+
+    .post-container {
+        width: 100%;
+        background: var(--bg-color);
+        border-radius: 6px;
+        padding: 20px;
+        color: #626262;
+        margin: 20px 0;
+    }
+
+    .user-profile span {
+        font-size: 13px;
+        color: #9a9a9a;
+    }
+
+    .post-text {
+        color: #9a9a9a;
+        margin: 15px 0;
+        font-size: 15px;
+    }
+
+    .post-text span {
+        color: #626262;
+        font-weight: 500;
+    }
+
+    .post-text a {
+        color: #1876f2;
+    }
+
+    .post-img {
+        width: 100%;
+        border-radius: 4px;
+        margin-bottom: 5px;
+    }
+
+    .post-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .activity-icon div img {
+        width: 18px;
+        margin-right: 10px;
+    }
+
+    .activity-icon div {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 30px;
+    }
+
+    .post-profile-icon {
+        display: flex;
+        align-items: center;
+    }
+
+    .post-profile-icon img {
+        width: 20px;
+        border-radius: 50%;
+        margin-right: 5px;
+    }
+
+    .post-row a {
+        color: #9a9a9a;
+    }
+
+    .load-btn {
+        display: block;
+        margin: auto;
+        cursor: pointer;
+        padding: 5px 10px;
+        border: 1px solid #9a9a9a;
+        color: var(--the-color);
+        background: transparent;
+        border-radius: 4px;
+    }
+
+    .footer {
+        text-align: center;
+        color: var(--the-color);
+        padding: 10px 0 20px;
+        font-size: 13px;
+    }
+
+    .setting-menu {
+        position: absolute;
+        width: 90%;
+        max-width: 350px;
+        background: var(--bg-color);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        top: 108%;
+        right: 5%;
+        max-height: 0;
+        transition: max-height 0.34s ease-in-out;
+    }
+
+    .setting-menu-height {
+        max-height: 450px;
+    }
+
+    .user-profile a {
+        font-size: 12px;
+        color: #1876f2;
+    }
+
+    .setting-menu-inner {
+        padding: 20px;
+    }
+
+    .setting-menu hr {
+        border: 0;
+        height: 1px;
+        background: #9a9a9a;
+        margin: 15px 0;
+    }
+
+    .setting-list {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+    }
+
+    .setting-list .setting-icons {
+        width: 38px;
+        margin-right: 10px;
+        border-radius: 50%;
+    }
+
+    .setting-list a {
+        display: flex;
+        flex: 1;
+        align-items: center;
+        justify-content: space-between;
+        color: var(--the-color);
+    }
+
+    #dark-btn {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #c2c2c2;
+        width: 45px;
+        padding: 2px 3px;
+        cursor: pointer;
+        border-radius: 50px;
+        display: flex;
+        transition: padding-left 0.5s, background 0.5s;
+    }
+
+    #dark-btn span {
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    #dark-btn.dark-btn-on {
+        padding-left: 23px;
+        background: #1876f2;
+    }
+</style>
+
+<body>
+    <nav>
+        <div class="nav-left">
+            <img src="logo.png" alt="nav-left-img-icon" class="logo">
+            <ul>
+                <li><img src="notification.png" alt="notification"></li>
+                <li><img src="inbox.png" alt="inbox"></li>
+                <li><img src="video.png" alt="video"></li>
+            </ul>
+        </div>
+        <div class="nav-right">
+
+            <div class="search-box">
+                <img src="search.png" alt="search">
+                <input type="text" placeholder="Search">
+            </div>
+
+            <div class="nav-user-icon online" onclick="settingmenu()">
+                <img src="profile-pic.png" alt="">
+            </div>
+        </div>
+        <!--Setting Menu-->
+        <div class="setting-menu">
+
+            <div id="dark-btn">
+                <span></span>
+            </div>
+
+            <div class="setting-menu-inner">
+                <div class="user-profile">
+                    <img src="./profile-pic.png" alt="">
+                    <div>
+                        <p>Jonh Nicholson</p>
+                        <a href="#">See your profile</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="user-profile">
+                    <img src="./feedback.png" alt="">
+                    <div>
+                        <p>Give Feedback</p>
+                        <a href="#">Help us to improve the new design</a>
+                    </div>
+                </div>
+                <hr>
+                <div class="setting-list">
+                    <img src="./setting.png" class="setting-icons">
+                    <a href="#">Settings & Privacy <img src="./arrow.png" width="10px"></a>
+                </div>
+                <div class="setting-list">
+                    <img src="./help.png" class="setting-icons">
+                    <a href="#">Help & Support <img src="./arrow.png" width="10px"></a>
+                </div>
+                <div class="setting-list">
+                    <img src="./display.png" class="setting-icons">
+                    <a href="#">Display & Accessibility <img src="./arrow.png" width="10px"></a>
+                </div>
+                <div class="setting-list">
+                    <img src="./logout.png" class="setting-icons">
+                    <a href="#">Logout <img src="./arrow.png" width="10px"></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <!--left-sidebar--->
+        <div class="left-sidebar">
+            <div class="imp-links">
+                <a href="#"><img src="news.png" alt="news"> Latest News </a>
+                <a href="#"><img src="friends.png" alt="friends"> Friends </a>
+                <a href="#"><img src="group.png" alt="group"> Group </a>
+                <a href="#"><img src="marketplace.png" alt="marketplace"> Marketplace </a>
+                <a href="#"><img src="watch.png" alt="watch"> Watch </a>
+                <a href="#">See More</a>
+            </div>
+            <div class="shortcut-links">
+                <p>Your Shortcuts</p>
+                <a href="#"><img src="./shortcut-1.png" alt="shortcut-1"> Web Developers </a>
+                <a href="#"><img src="./shortcut-2.png" alt="shortcut-1"> Web Design Course </a>
+                <a href="#"><img src="./shortcut-3.png" alt="shortcut-1"> Full Stack Development </a>
+                <a href="#"><img src="./shortcut-4.png" alt="shortcut-1"> Website Experts</a>
+            </div>
+        </div>
+        <!--main-content--->
+        <div class="main-content">
+            <div class="story-gallery">
+                <div class="story story1">
+                    <img src="./upload.png" alt="upload">
+                    <p>Post Story</p>
+                </div>
+                <div class="story story2">
+                    <img src="./member-1.png" alt="upload">
+                    <p>Alison</p>
+                </div>
+                <div class="story story3">
+                    <img src="./member-2.png" alt="upload">
+                    <p>Jackson</p>
+                </div>
+                <div class="story story4">
+                    <img src="./member-3.png" alt="upload">
+                    <p>Samona</p>
+                </div>
+                <div class="story story5">
+                    <img src="./member-4.png" alt="upload">
+                    <p>John Doe</p>
+                </div>
+            </div>
+
+            <div class="write-post-container">
+                <div class="user-profile">
+                    <img src="./profile-pic.png" alt="">
+                    <div>
+                        <p>Jonh Nicholson</p>
+                        <small>Public <i class="fas fa-caret-down"></i></small>
+                    </div>
+                </div>
+                <div class="post-input-container">
+                    <textarea placeholder="What's on your mind,John" rows="3"></textarea>
+                    <div class="add-post-links">
+                        <a href="#"><img src="./live-video.png" alt="video"> Live Video</a>
+                        <a href="#"><img src="./photo.png" alt="video"> Photo/Video</a>
+                        <a href="#"><img src="./feeling.png" alt="video"> feeling/Activity</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="./profile-pic.png" alt="">
+                        <div>
+                            <p>Jonh Nicholson</p>
+                            <span>June 24 2021, 13:40PM</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">Subscribe <span>@俊奕爱写代码</span> Youtube Channel to watch more videos on website
+                    development and
+                    UI design
+                    <a href="#俊奕爱写代码">#俊奕爱写代码</a> <a href="#俊奕爱写代码">#YoutubeChannel</a>
+                </p>
+                <img src="./feed-image-1.png" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icon">
+                        <div><img src="./like-blue.png"> 120</div>
+                        <div><img src="./comments.png"> 45</div>
+                        <div><img src="./share.png"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="./profile-pic.png" alt=""> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="./profile-pic.png" alt="">
+                        <div>
+                            <p>Jonh Nicholson</p>
+                            <span>June 24 2021, 13:40PM</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">Like and Share this video with friends, tag <span>@俊奕爱写代码</span> facebook pageon
+                    your post.Askyour doubts in comments.
+                    <a href="#俊奕爱写代码">#俊奕爱写代码</a> <a href="#俊奕爱写代码">#YoutubeChannel</a>
+                </p>
+                <img src="./feed-image-2.png" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icon">
+                        <div><img src="./like.png"> 20M</div>
+                        <div><img src="./comments.png"> 45</div>
+                        <div><img src="./share.png"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="./profile-pic.png" alt=""> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="./profile-pic.png" alt="">
+                        <div>
+                            <p>Jonh Nicholson</p>
+                            <span>June 24 2021, 13:40PM</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">Like and Share this video with friends, tag <span>@俊奕爱写代码</span> facebook pageon
+                    your post.Askyour doubts in comments.
+                    <a href="#俊奕爱写代码">#俊奕爱写代码</a> <a href="#俊奕爱写代码">#YoutubeChannel</a>
+                </p>
+                <img src="./feed-image-3.png" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icon">
+                        <div><img src="./like.png"> 20M</div>
+                        <div><img src="./comments.png"> 45</div>
+                        <div><img src="./share.png"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="./profile-pic.png" alt=""> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="./profile-pic.png" alt="">
+                        <div>
+                            <p>Jonh Nicholson</p>
+                            <span>June 24 2021, 13:40PM</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">Like and Share this video with friends, tag <span>@俊奕爱写代码</span> facebook pageon
+                    your post.Askyour doubts in comments.
+                    <a href="#俊奕爱写代码">#俊奕爱写代码</a> <a href="#俊奕爱写代码">#YoutubeChannel</a>
+                </p>
+                <img src="./feed-image-4.png" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icon">
+                        <div><img src="./like.png"> 20M</div>
+                        <div><img src="./comments.png"> 45</div>
+                        <div><img src="./share.png"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="./profile-pic.png" alt=""> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="post-container">
+                <div class="post-row">
+                    <div class="user-profile">
+                        <img src="./profile-pic.png" alt="">
+                        <div>
+                            <p>Jonh Nicholson</p>
+                            <span>June 24 2021, 13:40PM</span>
+                        </div>
+                    </div>
+                    <a href="#"><i class="fas fa-ellipsis-v"></i></a>
+                </div>
+
+                <p class="post-text">Like and Share this video with friends, tag <span>@俊奕爱写代码</span> facebook pageon
+                    your post.Askyour doubts in comments.
+                    <a href="#俊奕爱写代码">#俊奕爱写代码</a> <a href="#俊奕爱写代码">#YoutubeChannel</a>
+                </p>
+                <img src="./feed-image-5.png" class="post-img">
+
+                <div class="post-row">
+                    <div class="activity-icon">
+                        <div><img src="./like.png"> 20M</div>
+                        <div><img src="./comments.png"> 45</div>
+                        <div><img src="./share.png"> 20</div>
+                    </div>
+                    <div class="post-profile-icon">
+                        <img src="./profile-pic.png" alt=""> <i class="fas fa-caret-down"></i>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="load-btn">Load More <i class="fas fa-spinner"></i></button>
+        </div>
+
+
+        <!--right-sidebar--->
+        <div class="right-sidebar">
+
+            <div class="sidebar-title">
+                <h4>Events</h4>
+                <a href="#">See All</a>
+            </div>
+
+            <div class="event">
+                <div class="left-event">
+                    <h3>15</h3>
+                    <span>July</span>
+                </div>
+                <div class="right-event">
+                    <h4>Social Media</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Willson Tech Park</p>
+                    <a href="#">More Info</a>
+                </div>
+            </div>
+            <div class="event">
+                <div class="left-event">
+                    <h3>20</h3>
+                    <span>August</span>
+                </div>
+                <div class="right-event">
+                    <h4>Mobile Marketing</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Willson Tech Park</p>
+                    <a href="#">More Info</a>
+                </div>
+            </div>
+            <div class="sidebar-title">
+                <h4>Advertisement</h4>
+                <a href="#">Close</a>
+            </div>
+            <img src="./advertisement.png" alt="advertisement" class="sidebar-ads">
+
+            <div class="sidebar-title">
+                <h4>Conversation</h4>
+                <a href="#">Hide Chat</a>
+            </div>
+
+
+            <div class="online-list">
+                <div class="online">
+                    <img src="./member-1.png" alt="">
+                </div>
+                <p>Alison Mina</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="./member-2.png" alt="">
+                </div>
+                <p>Jackson Aston</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="./member-3.png" alt="">
+                </div>
+                <p>Samona Rosa</p>
+            </div>
+            <div class="online-list">
+                <div class="online">
+                    <img src="./member-4.png" alt="">
+                </div>
+                <p>Jackson Jonh</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>Copyright 2021 - NG JUN YI Youtube Channel</p>
+    </div>
+
+
+
+
+
+
+    <!--script-->
+    <script>
+        var settingsmenu = document.querySelector(".setting-menu");
+        var darkBTN = document.getElementById("dark-btn");
+
+        function settingmenu() {
+            settingsmenu.classList.toggle("setting-menu-height")
+        };
+        darkBTN.onclick = function () {
+            darkBTN.classList.toggle("dark-btn-on");
+            document.body.classList.toggle("dark-theme");
+
+            if(localStorage.getItem("theme") == "light"){
+                localStorage.setItem("theme", "dark");
+            }else{
+                localStorage.setItem("theme", "light");
+            }
+        }
+
+
+
+        if(localStorage.getItem("theme") == "light"){
+            darkBTN.classList.remove("dark-btn-on");
+            document.body.classList.remove("dark-theme");
+        }
+        else if(localStorage.getItem("theme") == "dark"){
+            darkBTN.classList.add("dark-btn-on");
+            document.body.classList.add("dark-theme");
+        }else{
+            localStorage.setItem("theme", "light");
+            
+        }
+
+        
+
+
+    </script>
+</body>
+
+</html>
